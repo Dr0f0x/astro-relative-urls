@@ -19,11 +19,7 @@ export class NodeFileSystem implements FileSystemService {
     return fs.readFileSync(path, encoding)
   }
 
-  writeFile(
-    path: string,
-    content: string,
-    encoding: BufferEncoding = 'utf8',
-  ): void {
+  writeFile(path: string, content: string, encoding: BufferEncoding = 'utf8'): void {
     fs.writeFileSync(path, content, encoding)
   }
 

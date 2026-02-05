@@ -6,12 +6,5 @@ export default defineConfig({
   dts: true,
   clean: true,
   external: ['astro'],
-  inlineOnly: [
-    'chalk',
-    'color-convert',
-    'color-name',
-    'ansi-styles',
-    'has-flag',
-    'supports-color',
-  ],
+  inlineOnly: ['chalk', 'color-convert', 'color-name', 'ansi-styles', 'has-flag', 'supports-color'],
 })

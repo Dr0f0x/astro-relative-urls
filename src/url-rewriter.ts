@@ -210,8 +210,7 @@ export class UrlRewriterImpl implements UrlRewriter {
       .map((f) => path.join(distDir, f))
       .find(
         (f) =>
-          this.FileSystemService.stat(f).isDirectory() &&
-          path.basename(f).startsWith('_astro'),
+          this.FileSystemService.stat(f).isDirectory() && path.basename(f).startsWith('_astro'),
       )
 
     if (!astroDir) {
@@ -229,10 +228,7 @@ export class UrlRewriterImpl implements UrlRewriter {
       const regex = new RegExp(`(${attributes.join('|')})="/${assetRel}"`, 'g')
       html = html.replace(regex, (match, attr) => {
         const absPath = path.join(astroDir, astroFile) // absolute path to the asset
-        let relativePath = path
-          .relative(fileDir, absPath)
-          .split(path.sep)
-          .join('/')
+        let relativePath = path.relative(fileDir, absPath).split(path.sep).join('/')
         if (!relativePath.startsWith('.')) relativePath = './' + relativePath
 
         changes.push({
@@ -256,38 +252,35 @@ export class UrlRewriterImpl implements UrlRewriter {
     changes: RewriteChange[],
   ) {
     // Match all <script type="module" src="..."></script>
-    return html.replace(
-      /<script\s+type="module"\s+src="([^"]+)"><\/script>/g,
-      (match, srcPath) => {
-        // Only inline scripts from _astro folder
-        if (!srcPath.includes('/_astro/')) return match
+    return html.replace(/<script\s+type="module"\s+src="([^"]+)"><\/script>/g, (match, srcPath) => {
+      // Only inline scripts from _astro folder
+      if (!srcPath.includes('/_astro/')) return match
 
-        // Compute absolute path to the JS file
-        let absPath
-        if (srcPath.startsWith('/')) {
-          absPath = path.join(distDir, srcPath.slice(1)) // remove leading /
-        } else {
-          absPath = path.resolve(fileDir, srcPath)
-        }
+      // Compute absolute path to the JS file
+      let absPath
+      if (srcPath.startsWith('/')) {
+        absPath = path.join(distDir, srcPath.slice(1)) // remove leading /
+      } else {
+        absPath = path.resolve(fileDir, srcPath)
+      }
 
-        if (!this.FileSystemService.exists(absPath)) {
-          this.Logger.warn(`[inlineAstroScripts] File not found: ${absPath}`)
-          return match
-        }
+      if (!this.FileSystemService.exists(absPath)) {
+        this.Logger.warn(`[inlineAstroScripts] File not found: ${absPath}`)
+        return match
+      }
 
-        // Read file contents
-        const jsContent = this.FileSystemService.readFile(absPath, 'utf8')
+      // Read file contents
+      const jsContent = this.FileSystemService.readFile(absPath, 'utf8')
 
-        changes.push({
-          type: RewriteChangeType.Inline,
-          file: path.relative(distDir, path.join(fileDir, srcPath)),
-          from: srcPath,
-          to: 'inlined',
-        })
+      changes.push({
+        type: RewriteChangeType.Inline,
+        file: path.relative(distDir, path.join(fileDir, srcPath)),
+        from: srcPath,
+        to: 'inlined',
+      })
 
-        // Return <script> with inlined JS
-        return `<script type="module">\n${jsContent}\n</script>`
-      },
-    )
+      // Return <script> with inlined JS
+      return `<script type="module">\n${jsContent}\n</script>`
+    })
   }
 }

@@ -22,10 +22,7 @@ export function getAllFiles(
     if (stat.isDirectory()) {
       results = results.concat(getAllFiles(fullPath, fs, baseDir, extensions))
     } else {
-      const relativePath = path
-        .relative(baseDir, fullPath)
-        .split(path.sep)
-        .join('/')
+      const relativePath = path.relative(baseDir, fullPath).split(path.sep).join('/')
 
       // If extensions array is provided, only include matching files
       if (!extensions || extensions.some((ext) => relativePath.endsWith(ext))) {
