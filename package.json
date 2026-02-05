@@ -1,0 +1,54 @@
+{
+  "name": "astro-relative-urls",
+  "version": "1.0.0",
+  "description": "Astro integration that transforms relative URLs (page-links, img-source, ...) into relative ones",
+  "homepage": "https://github.com/Dr0f0x/astro-relative-urls#readme",
+  "bugs": {
+    "url": "https://github.com/Dr0f0x/astro-relative-urls/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dr0f0x/astro-relative-urls.git"
+  },
+  "keywords": [
+    "astro-integration",
+    "astro-build",
+    "astro-component"
+  ],
+  "license": "MIT",
+  "author": "Dr0f0x",
+  "type": "module",
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "./dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "test": "vitest",
+    "test:unit": "vitest run test/unit",
+    "test:integration": "vitest run test/integration",
+    "test:ci": "vitest run"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "@typescript-eslint/parser": "^8.54.0",
+    "astro": "^5.17.1",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "globals": "^17.3.0",
+    "prettier": "^3.8.1",
+    "ts-node": "^10.9.2",
+    "tsdown": "^0.20.3",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.54.0",
+    "vitest": "^4.0.18"
+  }
+}
