@@ -2,3 +2,5 @@
 /dist
 /.vscode
 /coverage
+test/integration/mocked-public
+test/integration/mocked-dist

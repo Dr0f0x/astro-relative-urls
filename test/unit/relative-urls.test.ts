@@ -3,7 +3,7 @@ import { rewriteLinksAndAssets } from '../../src/relative-urls'
 import type { AstroIntegrationLogger } from 'astro'
 import type { FileSystemService } from '../../src/filesystem'
 import { MockDirectory, MockFile, MockFileSystem } from './mocked-filesystem'
-import { CombinedEditedHtml, CombinedHtml, mainJsContent, normalizeHtml } from './file-contents'
+import { CombinedEditedHtml, CombinedHtml, mainJsContent, normalizeHtml } from '../file-contents'
 import { RelativeUrlConfiguration } from '../../src/configuration'
 
 describe('rewriteLinksAndAssets', () => {
@@ -17,24 +17,24 @@ describe('rewriteLinksAndAssets', () => {
   }
 
   beforeEach(() => {
-    /* creates a mocked filesystem with the following structure:
-          public/
-          ├─ img.jpg
-          └─ favicon.svg
-          dist/
-          ├─ index.html
-          ├─ img.jpg
-          ├─ favicon.svg
-          ├─ blog/
-          │  └─ index.html
-          ├─ about/
-          │  └─ index.html
-          └─ _astro/
-              ├─ main.css
-              ├─ main.js
-              ├─ logo.png
-              └─ hero.jpg
-          */
+    /*  creates a mocked filesystem with the following structure:
+        public/
+        ├─ img.jpg
+        └─ favicon.svg
+        dist/
+        ├─ index.html
+        ├─ img.jpg
+        ├─ favicon.svg
+        ├─ blog/
+        │  └─ index.html
+        ├─ about/
+        │  └─ index.html
+        └─ _astro/
+            ├─ main.css
+            ├─ main.js
+            ├─ logo.png
+            └─ hero.jpg
+    */
     const root = new MockDirectory('')
     const dist = new MockDirectory('dist')
     root.setChild(dist)
@@ -97,7 +97,7 @@ describe('rewriteLinksAndAssets', () => {
     ).resolves.not.toThrow()
   })
 
-  it('produce the expected outputs for all files', async () => {
+  it('produces the expected outputs for all files', async () => {
     const pages = [{ pathname: 'about' }, { pathname: 'blog' }]
     const assets = new Map<string, URL[]>()
     const dir = 'dist'

@@ -17,14 +17,14 @@ relative, making it so you can view the built website by simply opening its
 ## Why?
 
 The whole motivation behind this was that i had to share the built website with
-people that have nothing to do with Programming and when i say nothing here i
+people that have nothing to do with Programming. And when i say nothing here i
 mean nothing: No node environment, no docker and not even VS Code with the
 live-server extension.
 
 ### How it works
 
 Most Operating Systems simply open html files in your browser and for single
-file sharing thats fine but as soon as you starts using links or URLs it gets a
+file sharing thats fine, but as soon as you starts using links or URLs it gets a
 bit difficult. The reason here being that astro assumes all your URLs to be
 absolute Paths from the `dist`-Folder (e.g. the link `/subpage` means the file
 `dist/subpage/.index.html`).

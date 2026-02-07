@@ -107,7 +107,7 @@ export const InlineScriptHtml = html` <div>
   <script src="/_astro/main.js"></script>
 </div>`
 
-export const mainJsContent = `console.log("hello")`
+export const mainJsContent = `console.log("astro")`
 
 export function EditedInlineScriptHtml(relativePathToDist: string): string {
   return html` <div>
