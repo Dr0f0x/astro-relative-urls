@@ -1,6 +1,7 @@
 import { rewriteLinksAndAssets } from './relative-urls'
 import { RelativeUrlConfiguration, DEFAULT_CONFIGURATION } from './configuration'
 import { AstroIntegrationLogger } from 'astro'
+import { NodeFileSystem } from './filesystem'
 export type { RelativeUrlConfiguration } from './configuration'
 
 export default function relativeUrls(
@@ -20,7 +21,7 @@ export default function relativeUrls(
         assets: Map<string, URL[]>
         logger: AstroIntegrationLogger
       }) => {
-        await rewriteLinksAndAssets(pages, dir, assets, logger, configuration)
+        await rewriteLinksAndAssets(pages, dir, assets, logger, new NodeFileSystem(), configuration)
       },
     },
   }

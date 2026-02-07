@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { FileSystemService } from './filesystem-service'
+import { FileSystemService } from './filesystem'
 import { RelativeUrlConfiguration } from './configuration'
 import { AstroIntegrationLogger } from 'astro'
 import { getAllFiles } from './utils'
@@ -261,7 +261,7 @@ export class UrlRewriterImpl implements UrlRewriter {
       if (srcPath.startsWith('/')) {
         absPath = path.join(distDir, srcPath.slice(1)) // remove leading /
       } else {
-        absPath = path.resolve(fileDir, srcPath)
+        absPath = this.FileSystemService.resolve(fileDir, srcPath)
       }
 
       if (!this.FileSystemService.exists(absPath)) {

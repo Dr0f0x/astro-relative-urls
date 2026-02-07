@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { FileSystemService } from './filesystem-service'
+import { FileSystemService } from './filesystem'
 
 /**
  * Recursively get all files in a folder

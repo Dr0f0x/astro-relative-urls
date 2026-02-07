@@ -2,17 +2,26 @@ import path from 'node:path'
 import chalk from 'chalk'
 import { performance } from 'node:perf_hooks'
 import { fileURLToPath } from 'node:url'
-import { FileSystemService, NodeFileSystem } from './filesystem-service'
+import { FileSystemService, NodeFileSystem } from './filesystem'
 import { UrlRewriter, UrlRewriterImpl, RewriteChange } from './url-rewriter'
 import { getAllFiles } from './utils'
 import { DEFAULT_CONFIGURATION, RelativeUrlConfiguration } from './configuration'
 import { AstroIntegrationLogger } from 'astro'
 
+/**
+ * Rewrites all URLs accroding to the passed configuration to relative ones.
+ * @param {{ pathname: string }[]} pages - A list of all generated pages
+ * @param {URL} dir - A URL path to the build output directory
+ * @param {Map<string, URL[]>} assets - Contains URLs to output files paths, grouped by IntegrationResolvedRoute pattern property
+ * @param {AstroIntegrationLogger} logger - Astro's logger
+ * @param {RelativeUrlConfiguration | null} configuration - the passed configuration object or null to use defaults
+ */
 export async function rewriteLinksAndAssets(
   pages: { pathname: string }[],
   dir: URL,
   assets: Map<string, URL[]>,
   logger: AstroIntegrationLogger,
+  fs: FileSystemService = new NodeFileSystem(),
   configuration: RelativeUrlConfiguration | null = null,
 ) {
   const config = {
@@ -20,7 +29,6 @@ export async function rewriteLinksAndAssets(
     ...configuration,
   } satisfies Required<RelativeUrlConfiguration>
 
-  const fs: FileSystemService = new NodeFileSystem()
   const urlRewriter: UrlRewriter = new UrlRewriterImpl(fs, logger, config)
 
   console.log(chalk.bgBlue.black(' running post-build link and asset rewrites '))
@@ -32,8 +40,7 @@ export async function rewriteLinksAndAssets(
 
   const htmlFiles = getAllFiles(distDir, fs, undefined, ['.html'])
 
-  const projectRoot = process.cwd() // your Astro project root
-  const publicDir = path.join(projectRoot, 'public') // public folder
+  const publicDir = path.join(distDir, config.publicFolder) // public folder
   const assetPaths = getAllFiles(publicDir, fs) // all files in public/
 
   for (let i = 0; i < htmlFiles.length; i++) {

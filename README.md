@@ -97,6 +97,9 @@ interface RelativeUrlConfiguration {
   /* log every change instead of only the overview, default=false */
   logAllChanges?: boolean
 
+  /* relative Path to the public Folder from the dist folder, default=..dist */
+  publicFolder?: string
+
   /* html attributes that are searched for PageUrls to change, default=["href"] */
   pageLinkAttributesToChange?: string[]
 

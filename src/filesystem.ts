@@ -1,4 +1,5 @@
 import fs from 'node:fs'
+import path from 'node:path'
 
 export interface FileSystemService {
   readDir(path: string): string[]
@@ -7,6 +8,7 @@ export interface FileSystemService {
   deleteFile(path: string): void
   stat(path: string): { isFile: () => boolean; isDirectory: () => boolean }
   removeDir(path: string): void
+  resolve(...paths: string[]): string
   exists(path: string): boolean
 }
 
@@ -37,5 +39,9 @@ export class NodeFileSystem implements FileSystemService {
 
   exists(path: string): boolean {
     return fs.existsSync(path)
+  }
+
+  resolve(...paths: string[]): string {
+    return path.resolve(...paths)
   }
 }
