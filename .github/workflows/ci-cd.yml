@@ -1,0 +1,86 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+    branches:
+      - master
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Run Linter
+        run: |
+          npm run lint
+
+      - name: Ensure prettier formatting
+        run: |
+          npm run format
+
+      - name: Build project
+        run: |
+          npm run build
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Link package
+        run: |
+          npm run build
+          npm link
+
+      - name: Run Unit Tests and generate coverage report
+        run: |
+          npm run test:unit
+
+      - name: Archive code coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-coverage-report
+          path: coverage/
+
+      - name: Upload coverage reports to Codecov
+        if: ${{ vars.UPLOAD_COVERAGE == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7
+        with:
+          files: coverage/cobertura-coverage.xml
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Integration Tests
+        run: |
+          npm run test:integration
+
+      - name: System Tests
+        run: |
+          npm run test:system

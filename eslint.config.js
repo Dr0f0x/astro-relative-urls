@@ -14,10 +14,16 @@ const prettierOptions = {
   printWidth: 100,
 }
 
-
 export default defineConfig([
   {
-    ignores: ['dist', 'node_modules', 'coverage', '.worktrees', 'docs'],
+    ignores: [
+      'dist',
+      'node_modules',
+      'coverage',
+      '.worktrees',
+      'docs',
+      'test/fixtures/astro-project',
+    ],
   },
   {
     files: ['**/*.ts'],
@@ -41,8 +47,9 @@ export default defineConfig([
     files: ['**/*.md'],
     plugins: {
       markdown,
+      prettier: prettierPlugin,
     },
-    extends: ['markdown/recommended'],
+    processor: 'markdown/markdown',
     rules: {
       'prettier/prettier': [
         'error',
@@ -52,6 +59,16 @@ export default defineConfig([
           proseWrap: 'always',
         },
       ],
+    },
+    extends: [],
+  },
+  {
+    files: ['**/*.md/*.ts'],
+    rules: {
+      '@typescript-eslint/no-unused-vars': 'off',
+      '@typescript-eslint/explicit-module-boundary-types': 'off',
+      '@typescript-eslint/ban-ts-comment': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
     },
   },
 ])

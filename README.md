@@ -1,5 +1,9 @@
 # astro-relative-urls
 
+[![CI](https://github.com/Dr0f0x/astro-relative-urls/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/Dr0f0x/astro-relative-urls/actions/workflows/ci-cd.yml)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/3852002630684e038a4838d8fd43c9af)](https://app.codacy.com/gh/Dr0f0x/astro-relative-urls/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![codecov](https://codecov.io/gh/Dr0f0x/astro-relative-urls/graph/badge.svg?token=R9QST61DW8)](https://codecov.io/gh/Dr0f0x/astro-relative-urls)
+
 This **Astro integration** transforms resource and page URLs from absolute to
 relative, making it so you can view the built website by simply opening its
 `index.html` in your browser.
@@ -92,7 +96,7 @@ and apply the needed changes, displaying an overview in the process.
 
 ## Configuration
 
-```typescript
+```ts
 interface RelativeUrlConfiguration {
   /* log every change instead of only the overview, default=false */
   logAllChanges?: boolean
