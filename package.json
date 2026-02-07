@@ -33,7 +33,7 @@
     "test": "vitest --coverage",
     "test:unit": "vitest run test/unit --coverage",
     "test:integration": "vitest run test/integration --coverage",
-    "test:system": "vitest run test/system --coverage",
+    "test:system": "vitest run test/system",
     "test:ci": "vitest run"
   },
   "devDependencies": {

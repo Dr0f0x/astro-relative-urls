@@ -3,12 +3,12 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { rewriteLinksAndAssets } from '../../src/relative-urls'
 import type { AstroIntegrationLogger } from 'astro'
 import { NodeFileSystem, type FileSystemService } from '../../src/filesystem'
-import { CombinedEditedHtml, normalizeHtml } from '../file-contents'
+import { CombinedEditedHtml, normalizeHtml } from '../fixtures/file-contents'
 import { RelativeUrlConfiguration } from '../../src/configuration'
 import { FileCreator } from './file-creator'
 import { fileURLToPath } from 'node:url'
 
-describe('rewriteLinksAndAssets', () => {
+describe('rewriteLinksAndAssets:Integration', () => {
   let logger: AstroIntegrationLogger
 
   const fs: FileSystemService = new NodeFileSystem()

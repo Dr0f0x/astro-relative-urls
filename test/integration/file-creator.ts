@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { CombinedHtml } from '../file-contents'
+import { CombinedHtml } from '../fixtures/file-contents'
 
 /**
  * FileCreator is a utility to create a predefined folder and file structure for testing.
@@ -24,11 +24,13 @@ export class FileCreator {
    *
    * public/
    * ├─ img.jpg
+   * ├─ favicon.ico
    * └─ favicon.svg
    * dist/
    * ├─ index.html
    * ├─ img.jpg
    * ├─ stuff.js
+   * ├─ favicon.ico
    * ├─ favicon.svg
    * ├─ blog/index.html
    * ├─ about/index.html
@@ -42,12 +44,14 @@ export class FileCreator {
     // Public folder
     this.ensureDir(this.publicDir)
     fs.writeFileSync(path.join(this.publicDir, 'img.jpg'), 'dummy image content')
+    fs.writeFileSync(path.join(this.publicDir, 'favicon.ico'), 'dummy image content')
     fs.writeFileSync(path.join(this.publicDir, 'favicon.svg'), '<svg></svg>')
 
     // Dist folder
     this.ensureDir(this.distDir)
     fs.writeFileSync(path.join(this.distDir, 'index.html'), CombinedHtml)
     fs.writeFileSync(path.join(this.distDir, 'img.jpg'), 'dummy image content')
+    fs.writeFileSync(path.join(this.distDir, 'favicon.ico'), 'dummy image content')
     fs.writeFileSync(path.join(this.distDir, 'stuff.js'), 'console.log("stuff")')
     fs.writeFileSync(path.join(this.distDir, 'favicon.svg'), '<svg></svg>')
 

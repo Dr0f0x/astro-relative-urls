@@ -39,6 +39,7 @@ export const PublicAssetHtml = html`<html lang="de">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
     <title>{pageTitle}</title>
     <style lang="scss">
       @use './PageLayout.scss';
@@ -56,6 +57,7 @@ export function EditedPublicAssetHtml(relativePathToDist: string): string {
     <head>
       <meta charset="utf-8" />
       <link rel="icon" type="image/svg+xml" href="${relativePathToDist}/favicon.svg" />
+      <link rel="icon" href="${relativePathToDist}/favicon.ico" />
       <title>{pageTitle}</title>
       <style lang="scss">
         @use './PageLayout.scss';

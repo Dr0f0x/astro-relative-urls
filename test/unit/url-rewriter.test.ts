@@ -9,7 +9,7 @@ import {
   mainJsContent,
   PageLinkHtml,
   PublicAssetHtml,
-} from '../file-contents'
+} from '../fixtures/file-contents'
 
 describe('UrlRewriterImpl', () => {
   let fsMock: FileSystemService

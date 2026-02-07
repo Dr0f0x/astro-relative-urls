@@ -8,7 +8,7 @@ export default defineConfig({
       provider: 'v8', // or 'istanbul'
       reporter: ['text', 'html', 'cobertura'],
       include: ['src/**/*.ts'],
-      exclude: ['src/**/filesystem.ts'],
+      exclude: ['src/**/filesystem.ts', 'test/system/**'],
     },
   },
 })

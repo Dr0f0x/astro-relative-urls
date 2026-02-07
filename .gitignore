@@ -2,5 +2,10 @@
 /dist
 /.vscode
 /coverage
+
 test/integration/mocked-public
 test/integration/mocked-dist
+
+test/fixtures/**/node_modules
+test/fixtures/**/dist
+test/system/astro-integration

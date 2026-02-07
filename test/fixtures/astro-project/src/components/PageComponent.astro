@@ -1,0 +1,70 @@
+---
+import PngImage from '../assets/image.png'
+import { Image } from 'astro:assets'
+const { pageTitle } = Astro.props as {
+  pageTitle: string
+}
+---
+
+<div class="page">
+  <h1>{pageTitle}</h1>
+  <div class="images">
+    <div class="image-border">
+      <img src="/img.jpg" alt="jpg-image" class="test-img" />
+    </div>
+    <div class="image-border">
+      <Image src={PngImage} alt="png-image" class="test-img" />
+    </div>
+  </div>
+  <p class="text" data-url="/blog">
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias dolorum odio fuga quo
+    architecto soluta ducimus cumque. Illo, esse id temporibus veniam iste reiciendis repudiandae
+    consectetur est iusto ipsam laudantium!
+  </p>
+  <p class="text" data-url="/">
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias dolorum odio fuga quo
+    architecto soluta ducimus cumque. Illo, esse id temporibus veniam iste reiciendis repudiandae
+    consectetur est iusto ipsam laudantium!
+  </p>
+  <a href="/unknown" class="unknown-link">Unknown Link</a>
+</div>
+<script src="../lib/main.js"></script>
+<style>
+  .page {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .image-border {
+    background-color: white;
+    border-radius: 20%;
+    width: 100px;
+    height: 100px;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+  }
+
+  .test-img {
+    width: 80%;
+    height: 80%;
+  }
+
+  .images {
+    display: flex;
+    gap: 10%;
+    justify-content: center;
+  }
+
+  .text {
+    max-width: 800px;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .unknown-link {
+    font-size: large;
+    font-weight: 600;
+  }
+</style>

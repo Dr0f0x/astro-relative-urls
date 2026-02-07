@@ -3,7 +3,12 @@ import { rewriteLinksAndAssets } from '../../src/relative-urls'
 import type { AstroIntegrationLogger } from 'astro'
 import type { FileSystemService } from '../../src/filesystem'
 import { MockDirectory, MockFile, MockFileSystem } from './mocked-filesystem'
-import { CombinedEditedHtml, CombinedHtml, mainJsContent, normalizeHtml } from '../file-contents'
+import {
+  CombinedEditedHtml,
+  CombinedHtml,
+  mainJsContent,
+  normalizeHtml,
+} from '../fixtures/file-contents'
 import { RelativeUrlConfiguration } from '../../src/configuration'
 
 describe('rewriteLinksAndAssets', () => {
@@ -20,11 +25,13 @@ describe('rewriteLinksAndAssets', () => {
     /*  creates a mocked filesystem with the following structure:
         public/
         ├─ img.jpg
+        ├─ favicon.ico
         └─ favicon.svg
         dist/
         ├─ index.html
         ├─ img.jpg
         ├─ favicon.svg
+        ├─ favicon.ico
         ├─ blog/
         │  └─ index.html
         ├─ about/
@@ -32,8 +39,7 @@ describe('rewriteLinksAndAssets', () => {
         └─ _astro/
             ├─ main.css
             ├─ main.js
-            ├─ logo.png
-            └─ hero.jpg
+            └─ logo.png
     */
     const root = new MockDirectory('')
     const dist = new MockDirectory('dist')
@@ -49,6 +55,7 @@ describe('rewriteLinksAndAssets', () => {
           dist,
         ),
       )
+      .setChild(new MockFile('favicon.ico', '<binary>'))
       .setChild(new MockDirectory('blog', dist, [new MockFile('index.html', CombinedHtml, null)]))
       .setChild(new MockDirectory('about', dist, [new MockFile('index.html', CombinedHtml, null)]))
 
@@ -57,7 +64,6 @@ describe('rewriteLinksAndAssets', () => {
       new MockDirectory('_astro', dist, [
         new MockFile('main.css', 'body { background: red }', null),
         new MockFile('logo.png', '<binary>', null),
-        new MockFile('hero.jpg', '<binary>', null),
         new MockFile('main.js', mainJsContent, null),
       ]),
     )
@@ -74,6 +80,7 @@ describe('rewriteLinksAndAssets', () => {
           dist,
         ),
       )
+      .setChild(new MockFile('favicon.ico', '<binary>'))
     root.setChild(publicDir)
     fsMock = new MockFileSystem(root)
 

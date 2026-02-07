@@ -1,0 +1,47 @@
+---
+const { pathname } = Astro.url
+const currentPath = pathname !== '/' ? pathname.replace(/\/$/, '') : '/'
+const { class: className, ...rest } = Astro.props
+---
+
+<div class={className} {...rest}>
+  <nav class="navigation">
+    <a href="/" class="nav-item" aria-current={currentPath === '/' ? 'page' : undefined}> Home </a>
+
+    <a href="/blog" class="nav-item" aria-current={currentPath === '/blog' ? 'page' : undefined}>
+      Blog
+    </a>
+
+    <a href="/about" class="nav-item" aria-current={currentPath === '/about' ? 'page' : undefined}>
+      About
+    </a>
+  </nav>
+</div>
+<style>
+  .navigation {
+    width: 100%;
+    background-color: rgb(48, 48, 48);
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px 5px;
+  }
+
+  .nav-item {
+    font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    font-size: x-large;
+    border-radius: 15px;
+    padding: 10px;
+    border: 5px solid #004d3c;
+  }
+
+  .nav-item:hover{
+
+  }
+
+  .nav-item[aria-current='page'] {
+    border-color: #038A6C;
+  }
+</style>

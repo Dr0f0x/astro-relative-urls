@@ -50,7 +50,7 @@ intended as means for easy sharing of your website.
 Run the following command to install and set it up for you automatically
 
 ```sh
-astro add astro-single-file # Follow the instructions
+astro add astro-relative-urls # Follow the instructions
 ```
 
 #### Manual installation
@@ -62,11 +62,11 @@ and type "y" in the terminal (meaning "yes") for each one.
 
 ```sh
 # Using NPM
-npx astro add -D astro-single-file
+npx astro add -D astro-relative-urls
 # Using Yarn
-yarn astro add -D astro-single-file
+yarn astro add -D astro-relative-urls
 # Using PNPM
-pnpx astro add -D astro-single-file
+pnpx astro add -D astro-relative-urls
 ```
 
 **`astro.config.mjs`**
